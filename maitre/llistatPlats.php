@@ -8,14 +8,14 @@ Fitxers relacionats: connection.php, logout.php, crearMenu.php
  *  */
 require '../connection.php';
 
-$username = $_SESSION['username'];
+/*$username = $_SESSION['username'];
 $password = $_SESSION['password'];
 $nom_usuari = $_SESSION['nom_usuari'];
 $tipus = $_SESSION['tipus'];
 
 $_SESSION["isEliminar"] = false;
 $_SESSION["isEditar"] = false;
-$_SESSION["isInsertar"] = false;
+$_SESSION["isInsertar"] = false;*/
 
 $connexio = new Connexio();
 
@@ -37,12 +37,12 @@ function cargarColumnasValores($titolTaula, $nomSelect, $result) {
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while ($row = mysqli_fetch_assoc($result)) {
-            print json_encode(array(
+            print json_encode(array_map('utf8_encode',array(
                 'estado' => '1',
                 'id' => $row["id"], 
                 'nom' => $row["nom"], 
                 'kcal' => $row["kcal"],
-                'tipus' => $row["tipus"]));
+                'tipus' => $row["tipus"])));
         }
 
     } else {
